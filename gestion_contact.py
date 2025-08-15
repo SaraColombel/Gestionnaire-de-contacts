@@ -19,7 +19,7 @@ def add_contact():
 
     fname = input("Enter contact first name : ")
     name = input("Enter contact name : ")
-    number = input("Enter contact number : ")
+    number = input("Enter contact phone number : ")
     if number.isnumeric() :
         contacts.append({'name': name, 'fname': fname, 'number': number})
         print("Contact has been successfully saved !")
@@ -27,7 +27,7 @@ def add_contact():
         with open("contacts.json", "w") as f:
             json.dump(contacts, f)
     else :
-        print("You need to save a number.")
+        print("You need to save a phone number.")
 
 
 def display_contacts():
