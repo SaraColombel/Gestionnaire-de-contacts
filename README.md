@@ -1,2 +1,2 @@
 # Gestionnaire-de-contacts
-Comme premier projet python concret j'ai choisi de coder un gestionnaire de contacts depuis lequel on peut enregistrer et afficher ses contacts.
+Développement d’un programme Python en terminal pour ajouter, afficher et sauvegarder des contacts, avec gestion de fichiers JSON et menu interactif.
