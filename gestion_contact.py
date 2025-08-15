@@ -1,6 +1,7 @@
 import json
 import os
 
+# Load contacts from JSON file if it exists
 if os.path.exists("contacts.json"):
     with open("contacts.json", "r") as f:
         contacts = json.load(f)
@@ -11,9 +12,9 @@ else:
 def add_contact():
 
     """
-    Demande prénom, nom et numéro à l'utilisateur.
-    Vérifie que le numéro est numérique.
-    Ajoute le contact à la liste et sauvegarde dans contacts.json.
+    Prompt the user to enter a first name, last name, and phone number.
+    Check that the phone number is numeric.
+    Add the contact to the contacts list and save it to contacts.json.
     """
 
     fname = input("Enter contact first name : ")
@@ -32,9 +33,9 @@ def add_contact():
 def display_contacts():
 
     """
-    Affiche tous les contacts de la liste.
-    Si la liste est vide, affiche un message.
-    Chaque contact est affiché avec prénom, nom et numéro.
+    Display all contacts in the contacts list.
+    If the list is empty, display an informative message.
+    Each contact is shown with first name, last name, and phone number.
     """
 
     if not contacts :
@@ -48,8 +49,8 @@ def display_contacts():
 
 choice = ""
 
-# Boucle principale du programme
-# Affiche le menu, exécute l'action choisie et demande si l'utilisateur veut revenir au menu
+# Main program loop
+# Displays the menu, executes the chosen action, and asks if the user wants to return to the menu
 while True:
     print("\nWelcome to your personal contact assistant ! What can I do for you today ?")
     print("1: Add a contact")
