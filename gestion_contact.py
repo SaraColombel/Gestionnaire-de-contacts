@@ -1,5 +1,6 @@
 import json
 import os
+import time
 
 # Load contacts from JSON file if it exists
 if os.path.exists("contacts.json"):
@@ -22,7 +23,12 @@ def add_contact():
     number = input("Enter contact phone number : ")
     if number.isnumeric() :
         contacts.append({'name': name, 'fname': fname, 'number': number})
+        print("Contact registration...")
+        time.sleep(1)
         print("Contact has been successfully saved !")
+        time.sleep(1)
+        print("Returning to main menu...")
+        time.sleep(1.5)
         # Immediat backup
         with open("contacts.json", "w") as f:
             json.dump(contacts, f)
@@ -41,10 +47,54 @@ def display_contacts():
     if not contacts :
         print("You have no friends.")
     else :
-        print("\nContact list")
-        for i, contact in enumerate(contacts, start=1):
-            print(f"{i}. {contact['fname']} {contact['name']} - {contact['number']}")
-            print("-" * 30)
+         while True:
+            print("\nContact list")
+            for i, contact in enumerate(contacts, start=1):
+                print(f"{i}. {contact['fname']} {contact['name']} - {contact['number']}")
+                print("-" * 30)
+
+            delete = input("Do you want to delete a contact from the list ? (Yes/No) : ").lower()
+            if delete in ['y', 'yes']:
+                delete_contact()
+            else:
+                print("Returning to main menu...")
+                time.sleep(1)
+                break
+
+
+def delete_contact():
+
+    """
+    Delete the selected contact from the contact list.
+    Delete the selected contact from the JSON File. 
+    """
+
+    num = input("What is the number of the contact you want to delete ? ")
+    if num.isnumeric() :
+        index = int(num)-1
+        if 0 <= index < len(contacts):
+            contact = contacts[index]
+            confirm = input(f"Are you sure you want to delete {contact['fname']} {contact['name']}? I'll really miss them! (Yes/No) : ").lower()
+            if confirm in ['y', 'yes']:
+                print("Okay... let me grab my hammer of forgetfulness... ")
+                time.sleep(1.2)
+                deleted = contacts.pop(index)
+
+                # Immediat backup
+                with open("contacts.json", "w") as f:
+                    json.dump(contacts, f)
+
+                print(f"Contact {deleted['fname']} {deleted['name']} has been deleted.")
+                time.sleep(1.5)
+            else:
+                print("Deletion cancelled.")
+                time.sleep(1.5)
+        else:
+            print("This contact does not exist, idiot.")
+            time.sleep(1.5)
+    else :
+        print("Please choose a number among the contact list. That should not be that hard...")
+        time.sleep(1.5)
 
 
 choice = ""
@@ -59,24 +109,23 @@ while True:
 
     choice = input("\nChoose your option : ")
 
-    if choice == '1' :
+    if choice == '1':
         add_contact()
-    elif choice == '2' :
+    elif choice == '2':
+        print("Hmm... where did I put that list again... ")
+        time.sleep(1.2)
+        print("There it is !")
+        time.sleep(0.8)
+
         display_contacts()
     elif choice == '3':
-        print("\nGoodbye !")
-        # Save to a json file
+        print("Already leaving me?")
+        time.sleep(1)
+        print("Promise me you’ll come back soon, okay?")
+        time.sleep(1)
         with open("contacts.json", "w") as f:
             json.dump(contacts, f)
         break
     else:
         print("You are asked to choose a number between 1 and 3.")
-        continue
-    retour = input("Do you want to return to the main menu ? (Yes/No) : ").lower()
-    if retour not in ['yes', 'y']:
-        # Save to a json file
-        with open("contacts.json", "w") as f:
-            json.dump(contacts, f)
-        print("Goodbye !")
-        break
 
